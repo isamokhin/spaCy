@@ -8,6 +8,7 @@ merge_char_classes = lambda classes: "[{}]".format("||".join(classes))
 split_chars = lambda char: list(char.strip().split(" "))
 merge_chars = lambda char: char.strip().replace(" ", "|")
 
+<<<<<<< Updated upstream
 _bengali = r"[\p{L}&&\p{Bengali}]"
 _hebrew = r"[\p{L}&&\p{Hebrew}]"
 _latin_lower = r"[\p{Ll}&&\p{Latin}]"
@@ -21,9 +22,26 @@ _tatar_lower = r"[әөүҗңһ]"
 _tatar_upper = r"[ӘӨҮҖҢҺ]"
 _greek_lower = r"[α-ωάέίόώήύ]"
 _greek_upper = r"[Α-ΩΆΈΊΌΏΉΎ]"
+=======
+_bengali = r'[\p{L}&&\p{Bengali}]'
+_hebrew = r'[\p{L}&&\p{Hebrew}]'
+_latin_lower = r'[\p{Ll}&&\p{Latin}]'
+_latin_upper = r'[\p{Lu}&&\p{Latin}]'
+_latin = r'[[\p{Ll}||\p{Lu}]&&\p{Latin}]'
+_persian = r'[\p{L}&&\p{Arabic}]'
+_russian_lower = r'[ёа-я]'
+_russian_upper = r'[ЁА-Я]'
+_ukrainian_lower = r'[а-яґєї]'
+_ukrainian_upper = r'[А-ЯҐЄЇ]'
+_sinhala = r'[\p{L}&&\p{Sinhala}]'
+_tatar_lower = r'[әөүҗңһ]'
+_tatar_upper = r'[ӘӨҮҖҢҺ]'
+_greek_lower = r'[α-ωάέίόώήύ]'
+_greek_upper = r'[Α-ΩΆΈΊΌΏΉΎ]'
+>>>>>>> Stashed changes
 
-_upper = [_latin_upper, _russian_upper, _tatar_upper, _greek_upper]
-_lower = [_latin_lower, _russian_lower, _tatar_lower, _greek_lower]
+_upper = [_latin_upper, _russian_upper, _ukrainian_upper, _tatar_upper, _greek_upper]
+_lower = [_latin_lower, _russian_lower, _ukrainian_lower, _tatar_lower, _greek_lower]
 _uncased = [_bengali, _hebrew, _persian, _sinhala]
 
 ALPHA = merge_char_classes(_upper + _lower + _uncased)

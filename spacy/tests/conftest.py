@@ -5,8 +5,60 @@ import pytest
 from spacy.util import get_lang_class
 
 
+<<<<<<< Updated upstream
 def pytest_addoption(parser):
     parser.addoption("--slow", action="store_true", help="include slow tests")
+=======
+
+# These languages are used for generic tokenizer tests – only add a language
+# here if it's using spaCy's tokenizer (not a different library)
+# TODO: re-implement generic tokenizer tests
+_languages = ['bn', 'ca', 'da', 'de', 'el', 'en', 'es', 'fi', 'fr', 'ga', 'he', 'hu', 'id',
+              'it', 'nb', 'nl', 'pl', 'pt', 'ro', 'ru', 'sv', 'tr', 'ar', 'ur', 'tt', 'uk',
+              'xx']
+
+_models = {'en': ['en_core_web_sm'],
+           'de': ['de_core_news_sm'],
+           'fr': ['fr_core_news_sm'],
+           'xx': ['xx_ent_web_sm'],
+           'en_core_web_md': ['en_core_web_md'],
+           'es_core_news_md': ['es_core_news_md']}
+
+
+# only used for tests that require loading the models
+# in all other cases, use specific instances
+
+@pytest.fixture(params=_models['en'])
+def EN(request):
+    return load_test_model(request.param)
+
+
+@pytest.fixture(params=_models['de'])
+def DE(request):
+    return load_test_model(request.param)
+
+
+@pytest.fixture(params=_models['fr'])
+def FR(request):
+    return load_test_model(request.param)
+
+
+@pytest.fixture()
+def RU(request):
+    pymorphy = pytest.importorskip('pymorphy2')
+    return util.get_lang_class('ru')()
+
+@pytest.fixture()
+def JA(request):
+    mecab = pytest.importorskip("MeCab")
+    return util.get_lang_class('ja')()
+
+
+#@pytest.fixture(params=_languages)
+#def tokenizer(request):
+#lang = util.get_lang_class(request.param)
+#return lang.Defaults.create_tokenizer()
+>>>>>>> Stashed changes
 
 
 @pytest.fixture(scope="module")
@@ -112,7 +164,16 @@ def tr_tokenizer():
     return get_lang_class("tr").Defaults.create_tokenizer()
 
 
+<<<<<<< Updated upstream
 @pytest.fixture(scope="session")
+=======
+@pytest.fixture(scope='session')
+def uk_tokenizer():
+    pymorphy = pytest.importorskip('pymorphy2')
+    return util.get_lang_class('uk').Defaults.create_tokenizer()
+
+@pytest.fixture(scope='session')
+>>>>>>> Stashed changes
 def ca_tokenizer():
     return get_lang_class("ca").Defaults.create_tokenizer()
 
